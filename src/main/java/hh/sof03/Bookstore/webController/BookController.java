@@ -8,6 +8,6 @@ public class BookController {
 
 	@GetMapping("/index")
 	public String Book() {
-		return "";
+		return "bookstore";
 	}
 }
