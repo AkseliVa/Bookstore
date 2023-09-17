@@ -12,10 +12,13 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	private String title;
 	private String author;
+	
 	@Column(name="published_year")
 	private Integer year;
+	
 	private String isbn;
 	private Integer price;
 	
