@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.sof03.Bookstore.domain.Book;
 import hh.sof03.Bookstore.domain.BookRepository;
+import hh.sof03.Bookstore.domain.Category;
+import hh.sof03.Bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -20,16 +22,28 @@ public class BookstoreApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository) {
+	public CommandLineRunner bookDemo(BookRepository brepository, CategoryRepository crepository) {
 		return(args) -> {
 			log.info("Save some books");
-			repository.save(new Book("kakka", "pissa", 1999, "12345", 15));
-			repository.save(new Book("kirja", "kirjanen", 2000, "54321", 1));
-			repository.save(new Book("demo", "demonen", 1111, "1", 5));
+			brepository.save(new Book("kakka", "pissa", 1999, "12345", 15));
+			brepository.save(new Book("kirja", "kirjanen", 2000, "54321", 1));
+			brepository.save(new Book("demo", "demonen", 1111, "1", 5));
+			
+			log.info("Save some categories");
+			Category category1 = new Category("Horror");
+			crepository.save(category1);
+			Category category2 = new Category("Romance");
+			crepository.save(category2);
+			Category category3 = new Category("Comic");
+			crepository.save(category3);
 			
 			log.info("Fetch all books");
-			for (Book book : repository.findAll()) {
+			for (Book book : brepository.findAll()) {
 				log.info(book.toString());
+			}
+			log.info("Fetch all categories");
+			for (Category category : crepository.findAll()) {
+				log.info(category.toString());
 			}
 		};
 	}
