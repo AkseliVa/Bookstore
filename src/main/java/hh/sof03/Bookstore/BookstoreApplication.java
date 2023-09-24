@@ -24,11 +24,6 @@ public class BookstoreApplication {
 	@Bean
 	public CommandLineRunner bookDemo(BookRepository brepository, CategoryRepository crepository) {
 		return(args) -> {
-			log.info("Save some books");
-			brepository.save(new Book("kakka", "pissa", 1999, "12345", 15));
-			brepository.save(new Book("kirja", "kirjanen", 2000, "54321", 1));
-			brepository.save(new Book("demo", "demonen", 1111, "1", 5));
-			
 			log.info("Save some categories");
 			Category category1 = new Category("Horror");
 			crepository.save(category1);
@@ -36,6 +31,11 @@ public class BookstoreApplication {
 			crepository.save(category2);
 			Category category3 = new Category("Comic");
 			crepository.save(category3);
+			
+			log.info("Save some books");
+			brepository.save(new Book("kakka", "pissa", 1999, "12345", 15, category1));
+			brepository.save(new Book("kirja", "kirjanen", 2000, "54321", 1, category2));
+			brepository.save(new Book("demo", "demonen", 1111, "1", 5, category3));
 			
 			log.info("Fetch all books");
 			for (Book book : brepository.findAll()) {

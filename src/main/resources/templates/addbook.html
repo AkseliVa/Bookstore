@@ -38,6 +38,14 @@
 			<br />
 			<br />
 			
+		<label for="deplist">Department</label>
+			<select id="catlist" th:field="*{category}" class="form-control">
+       			<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+    		</select>
+    		
+    		<br />
+    		<br />
+			
 		<input type="submit" class="btn btn-primary" value="Save"></input>
 	</form>
 </body>
