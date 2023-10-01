@@ -26,8 +26,8 @@ public class Book {
 	private String isbn;
 	private Integer price;
 	
-	@ManyToOne
-	@JsonIgnoreProperties ("books")
+	@ManyToOne //Monta tämän luokan oliota voi olla kytköksissä "category" luokan olioon
+	@JsonIgnoreProperties ("books") //Ei huomioi "categoryn" "books" ominaisuutta
 	@JoinColumn(name="categoryid")
 	private Category category;
 	

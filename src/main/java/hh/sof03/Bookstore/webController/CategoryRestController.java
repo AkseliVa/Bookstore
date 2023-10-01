@@ -18,19 +18,19 @@ public class CategoryRestController {
 	@Autowired
 	private CategoryRepository repository;
 
-	//REST-service to get all the categories from the database in JSON format
+	//Palauttaa listan "Category" olioita, jotka on haettu "Categoryrepository":sta ja välittää ne JSON-muodossa
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
 	public @ResponseBody List<Category> getCategorysRest() {
 		return (List<Category>) repository.findAll();
 	}
 
-	//REST-service to get a single categoy from the database in JSON format using its id
+	//Palauttaa tietyn "categoryId"-paramatrillä haetun olion ja välittää sen JSON-muodossa eteenpäin
 	@RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
 	public @ResponseBody Optional<Category> findCategoryRest(@PathVariable("id") Long categoryId) {
 		return repository.findById(categoryId);
 	}
 
-	//REST-service to save a single category into the database
+	//Mahdollistaa tavan tallentaa uuden "Category" olion POST-metodin avulla
 	@RequestMapping(value = "/categories", method = RequestMethod.POST)
 	public @ResponseBody Category saveCategoryRest(@RequestBody Category category) {
 		return repository.save(category);

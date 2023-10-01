@@ -18,19 +18,19 @@ public class BookRestController {
 	@Autowired
 	private BookRepository repository; 
 
-	//REST-service to get a list of all the books in the repository/database
+	//Palauttaa listan "Book" olioita, jotka on haettu "Bookrepository":sta ja välittää ne JSON-muodossa
     @RequestMapping(value="/books", method = RequestMethod.GET)
     public @ResponseBody List<Book> bookListRest() {	
         return (List<Book>) repository.findAll();
     }    
 
-    //REST-service to get a single book from the database using its id
+    //Palauttaa tietyn "bookId"-paramatrillä haetun olion ja välittää sen JSON-muodossa eteenpäin
     @RequestMapping(value="/books/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
     	return repository.findById(bookId);
     }      
     
-    //REST-service to save a new book into the database
+    //Mahdollistaa tavan tallentaa uuden "Book" olion POST-metodin avulla
     @RequestMapping(value="/books", method = RequestMethod.POST)
     public @ResponseBody Book saveBookRest(@RequestBody Book book) {	
     	return repository.save(book);
