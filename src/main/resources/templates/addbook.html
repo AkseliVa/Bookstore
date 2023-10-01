@@ -38,7 +38,7 @@
 			<br />
 			<br />
 			
-		<label for="deplist">Department</label>
+		<label for="deplist">Category</label>
 			<select id="catlist" th:field="*{category}" class="form-control">
        			<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
     		</select>
