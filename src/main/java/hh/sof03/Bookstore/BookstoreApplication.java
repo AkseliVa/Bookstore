@@ -11,6 +11,8 @@ import hh.sof03.Bookstore.domain.Book;
 import hh.sof03.Bookstore.domain.BookRepository;
 import hh.sof03.Bookstore.domain.Category;
 import hh.sof03.Bookstore.domain.CategoryRepository;
+import hh.sof03.Bookstore.domain.User;
+import hh.sof03.Bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -22,7 +24,7 @@ public class BookstoreApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository brepository, CategoryRepository crepository) {
+	public CommandLineRunner bookDemo(BookRepository brepository, CategoryRepository crepository, UserRepository urepository) {
 		return(args) -> {
 			log.info("Save some categories");
 			Category category1 = new Category("Horror");
@@ -36,6 +38,11 @@ public class BookstoreApplication {
 			brepository.save(new Book("kakka", "pissa", 1999, "12345", 15, category1));
 			brepository.save(new Book("kirja", "kirjanen", 2000, "54321", 1, category2));
 			brepository.save(new Book("demo", "demonen", 1111, "1", 5, category3));
+			
+			User user1 = new User("user","$2a$10$zVhl5zIp0NtwOBlQxsP9OOb4z3f4VrkdMlpE9Wo.65M34Pgx8tvu." , "USER", "user@gmail.com");
+			User user2 = new User("admin", "$2a$10$i2LZ6rC20LOYzuurXbYBTe.HCwJiQDeFKd2dQNXFxdzmfgBNJxno.", "ADMIN", "user@gmail.com");
+			urepository.save(user1);
+			urepository.save(user2);
 			
 			log.info("Fetch all books");
 			for (Book book : brepository.findAll()) {
