@@ -28,6 +28,9 @@ public class WebSecurityConfig {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	//All users see the css
+	//Default page after logging in is booklist.hmtl
+	//All users can logout
 	@Bean
 	public SecurityFilterChain configure (HttpSecurity http) throws Exception {
 		http
@@ -45,6 +48,7 @@ public class WebSecurityConfig {
 		return http.build();
 	}
 	
+	//Using BCrypt to encode the passwords
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());

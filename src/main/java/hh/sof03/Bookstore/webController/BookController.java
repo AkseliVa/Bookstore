@@ -24,8 +24,7 @@ public class BookController {
 	@Autowired
 	CategoryRepository categoryrepository;
 
-	// Hakee kaikki "bookRepository":n "Book" oliot listana ja välittää ne
-	// "booklist" tiedostoon
+	//Fetches all "bookRepository":s "Book"-entities and passes them off to booklist.html
 	@GetMapping("/booklist")
 	public String getBooks(Model model) {
 		List<Book> books = (List<Book>) bookRepository.findAll();
@@ -35,8 +34,8 @@ public class BookController {
 		return "booklist";
 	}
 
-	// Poistaa "bookRepository":sta id-arvoa käyttäen yhden "Book" olion ja
-	// uudelleenohjaa takaisin "booklist"-sivulle
+	//Deletes the right entity from "bookRepository" using the "id"-value
+	//After this user gets redirected back to tthe booklist.html-page
 	@GetMapping("/delete/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
@@ -44,8 +43,7 @@ public class BookController {
 		return "redirect:/booklist";
 	}
 
-	// Luo uuden tyhjän "Book"-olion ja kaikki "categoryRepository":n oliot ja
-	// välittää ne "addbook"-sivulle
+	//Creates a new empty "Book"-entity and passes it and all the categories to addbook.html page
 	@RequestMapping("/add")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
@@ -53,17 +51,16 @@ public class BookController {
 		return "addbook";
 	}
 
-	// Tallentaa parametrinä saadun "Book"-olion "bookRepository":n ja
-	// uudelleenohjaa "booklist"-sivulle
+	//Saves the "Book"-entity given as a parameter and saves it to the "bookRepository"
+	//After this user gets redirected to the booklist.hmtl-page
 	@PostMapping("/save")
 	public String save(Book book) {
 		bookRepository.save(book);
 		return "redirect:booklist";
 	}
 
-	// Etsii "bookRepository":sta ja "categoryRepository":sta parametrinä saadulla
-	// "bookId"-arvolla oliota ja ohjaa "editbook"-sivulle jolle välitetään kyseisen
-	// olion tiedot ja antaa muokata niitä
+	//Uses the "id"-value given as a parameter to find the corresponding book-entity
+	//After this user gets directed to the editbook.html-page where they can edit the corresponding entity
 	@RequestMapping("/edit/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));

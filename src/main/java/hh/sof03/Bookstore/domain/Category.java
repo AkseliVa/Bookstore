@@ -15,14 +15,13 @@ import jakarta.persistence.OneToMany;
 public class Category {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO) // Antaa oliolle "Id"-arvoksi "categoryid" ominaisuuden ja luo ne
-													// automaattisesti
+	@GeneratedValue(strategy = GenerationType.AUTO) // Automatic unique id-value is provided
 	private Long categoryid;
 	private String name;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category") // Yksi tämän luokan olio voi olla kytköksissä moneen
-																	// "Book" luokan olioon
-	@JsonIgnoreProperties("category") //REST ei ota huomioon "Book" olioiden "category" ominaisuutta
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category") // One of this classes entities can be attached
+																// to many of book classes entities
+	@JsonIgnoreProperties("category") //REST doesn't take into account this propertys "category" value
 	private List<Book> books;
 
 	public Long getCategoryid() {

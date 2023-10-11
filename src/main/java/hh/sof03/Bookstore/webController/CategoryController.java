@@ -18,8 +18,7 @@ public class CategoryController {
 	@Autowired
 	CategoryRepository categoryrepository;
 
-	// Hakee kaikki "categoryRepository":n "Category" oliot listana ja välittää ne
-	// "categorylist"-sivulle
+	//Fetches all "categoryRepository":s "Book"-entities and passes them off to categorylist.html
 	@GetMapping("/categorylist")
 	public String getList(Model model) {
 		List<Category> categories = (List<Category>) categoryrepository.findAll();
@@ -27,17 +26,16 @@ public class CategoryController {
 		
 		return "categorylist";
 	}
-	
-	// Luo uuden tyhjän "Category"-olion ja
-	// välittää sen "addcategory"-sivulle
+
+	//Creates a new empty "Category"-entity and passes it and all the categories to addcategory.html page
 	@RequestMapping("/addcategory")
 	public String addCategory(Model model) {
 		model.addAttribute("category", new Category());
 		return "addcategory";
 	}
 	
-	// Tallentaa parametrinä saadun "Category"-olion "categoryrepository":n
-	// uudelleenohjaa "categorylist"-sivulle
+	//Saves the "Category"-entity given as a parameter and saves it to the "categoryRepository"
+	//After this user gets redirected to the categorylist.hmtl-page
 	@PostMapping("/savecategory")
 	public String saveCategory(Category category) {
 		categoryrepository.save(category);

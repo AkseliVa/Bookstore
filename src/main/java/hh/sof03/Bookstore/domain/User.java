@@ -9,11 +9,13 @@ import jakarta.persistence.Id;
 @Entity (name="users")
 public class User {
 
+	//Id-value is the identifies, it has to exist and it cannot be updated once created
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id", nullable=false, updatable=false)
 	private Long id;
 	
+	//Username must be unique
 	@Column(name="username", nullable=false, unique=true)
 	private String username;
 	

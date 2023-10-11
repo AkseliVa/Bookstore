@@ -19,6 +19,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		this.repository = userRepository;
 	}
 	
+	//Uses the "findByusername"-function to find the corresponding user using the "username"-parameter
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User curruser = repository.findByUsername(username);
