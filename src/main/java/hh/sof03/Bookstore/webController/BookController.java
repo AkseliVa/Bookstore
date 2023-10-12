@@ -35,7 +35,8 @@ public class BookController {
 	}
 
 	//Deletes the right entity from "bookRepository" using the "id"-value
-	//After this user gets redirected back to tthe booklist.html-page
+	//After this user gets redirected back to the booklist.html-page
+	//User has to have "ADMIN" authority
 	@GetMapping("/delete/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
