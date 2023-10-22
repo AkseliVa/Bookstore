@@ -16,17 +16,18 @@ import hh.sof03.Bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
-	
-	//Inserting categories and books in to repositories
+
+	// Inserting categories and books in to repositories
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository brepository, CategoryRepository crepository, UserRepository urepository) {
-		return(args) -> {
+	public CommandLineRunner bookDemo(BookRepository brepository, CategoryRepository crepository,
+			UserRepository urepository) {
+		return (args) -> {
 			log.info("Save some categories");
 			Category category1 = new Category("Horror");
 			crepository.save(category1);
@@ -34,17 +35,19 @@ public class BookstoreApplication {
 			crepository.save(category2);
 			Category category3 = new Category("Comic");
 			crepository.save(category3);
-			
+
 			log.info("Save some books");
 			brepository.save(new Book("kakka", "pissa", 1999, "12345", 15, category1));
 			brepository.save(new Book("kirja", "kirjanen", 2000, "54321", 1, category2));
 			brepository.save(new Book("demo", "demonen", 1111, "1", 5, category3));
-			
-			User user1 = new User("user","$2a$10$zVhl5zIp0NtwOBlQxsP9OOb4z3f4VrkdMlpE9Wo.65M34Pgx8tvu." , "USER", "user@gmail.com");
-			User user2 = new User("admin", "$2a$10$i2LZ6rC20LOYzuurXbYBTe.HCwJiQDeFKd2dQNXFxdzmfgBNJxno.", "ADMIN", "user@gmail.com");
+
+			User user1 = new User("user", "$2a$10$zVhl5zIp0NtwOBlQxsP9OOb4z3f4VrkdMlpE9Wo.65M34Pgx8tvu.", "USER",
+					"user@gmail.com");
+			User user2 = new User("admin", "$2a$10$i2LZ6rC20LOYzuurXbYBTe.HCwJiQDeFKd2dQNXFxdzmfgBNJxno.", "ADMIN",
+					"user@gmail.com");
 			urepository.save(user1);
 			urepository.save(user2);
-			
+
 			log.info("Fetch all books");
 			for (Book book : brepository.findAll()) {
 				log.info(book.toString());

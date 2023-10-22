@@ -21,7 +21,7 @@ public class Category {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category") // One of this classes entities can be attached
 																// to many of book classes entities
-	@JsonIgnoreProperties("category") //REST doesn't take into account this propertys "category" value
+	@JsonIgnoreProperties("category") //REST doesn't take into account this properties "category" value
 	private List<Book> books;
 
 	public Long getCategoryid() {
